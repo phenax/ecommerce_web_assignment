@@ -26,7 +26,7 @@ export class ProductList extends Component {
 
     render() {
         const allProducts= this.state.products.map((val, i)=> (
-            <Product name={val.name} descr={val.descr} price={val.price} key={i} />
+            <Product name={val.name} descr={val.descr} price={val.price} thumb={val.thumb} id={i} key={i} />
         ));
         return (
             <div className='products-list row clearfix'>

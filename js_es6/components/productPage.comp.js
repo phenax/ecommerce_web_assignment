@@ -23,16 +23,27 @@ export class ProductPage extends Component {
     }
 
     render() {
+        const image= (
+            <div className='image--img'
+                style={{ 'backgroundImage': `url(./img/${this.state.product.thumb})` }}>
+                &nbsp;
+            </div>
+        );
+
         return (
             <div className='product-page clearfix'>
                 <div className='wrapper row clearfix'>
                     <div className='image col col-4'>
-                        <div className='image'>&nbsp;{this.state.product.thumb}</div>
+                        {(this.state.product.thumb)? (image): (<div>&nbsp;</div>) }
                     </div>
                     <div className='data col col-8'>
                         <div className='data--name'>{this.state.product.name}</div>
+                        <div className='data--price'>Rs. {this.state.product.price}</div>
                         <div className='data--descr'>{this.state.product.descr}</div>
-                        <div className='data--price'>{this.state.product.price}</div>
+                        <div className='data--buttons'>
+                            <button className='data--buttons--btns full-500 buy-now'>Buy Now</button>
+                            <button className='data--buttons--btns full-500 add-wish'>Add to wishlist</button>
+                        </div>
                     </div>
                 </div>
             </div>
