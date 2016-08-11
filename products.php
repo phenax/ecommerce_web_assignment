@@ -1,7 +1,4 @@
 <?php
-
-require_once './models/Products.php';
-
 require_once './partials/head.php'
 ?>
 	<title>Awesome ECommerce</title>
@@ -11,32 +8,16 @@ require_once './partials/head.php'
 
 <?php
 
-if(isset($_GET['id'])) {
+function sanitizeToInt($data) {
+	$data= htmlspecialchars($data);
+	return (int) $data;
+}
+
+$data_render_id= (isset($_GET['id']))? sanitizeToInt($_GET['id']): -1;
 ?>
 
+<div class='products-app clearfix' data-request-id='<?= $data_render_id ?>'>
+	Rendering...
+</div>
 
-
-<?php } else { ?>
-	<div class='clearfix'>
-	<div class='products-list row clearfix'>
-		<?php for($i= 0; $i < $products->size(); $i++) { ?>
-			<?php $product= $products->getProduct($i) ?>
-
-			<div class='product col col-4 clearfix'>
-				<div class='product-wrap'>
-					<div class='product--name'>
-						<?= $product->getName() ?>
-					</div>
-					<div class='product--price'>
-						Rs. <?= $product->getPrice() ?>
-					</div>
-					<div class='product--descr'>
-						<?= $product->getDescr() ?>
-					</div>
-				</div>
-			</div>
-
-		<?php } ?>
-	</div>
-	</div>
-<?php } ?>
+<script src='./js/products.js'></script>

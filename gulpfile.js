@@ -18,7 +18,7 @@ const FLAGS= {
 const BUILD_DIR= "./js";
 const FILE_DIR= "./js_es6";
 
-let babelPresets= [ "es2015" ];
+let babelPresets= [ "es2015", "react" ];
 let fileName= "script.js";
 
 
