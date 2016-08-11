@@ -31,18 +31,35 @@
 							<div class='form--text--label'>Password</div>
 							<input type='password' name='password' class='form--text--input js-input' />
 						</label>
-						<button class='form--submit'>Log In</button>
+						<div class='form--submit'>
+							<button class='form--submit--btn'>Log In</button>
+						</div>
 					</form>
 				</div>
 				<div class='authentication--signup js-auth-type js-signup'>
-					Cool signup<br />
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-					exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-					irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-					pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-					deserunt mollit anim id est laborum.
+					<form class='form' onSubmit='return false;'>
+						<label class='form--text'>
+							<div class='form--text--label'>Full Name</div>
+							<input type='text' name='name' class='form--text--input js-input' />
+						</label>
+						<label class='form--text'>
+							<div class='form--text--label'>Email Address</div>
+							<input type='password' name='email' class='form--text--input js-input' />
+						</label>
+						<label class='form--text'>
+							<div class='form--text--label'>Password</div>
+							<input type='password' name='password' class='form--text--input js-input' />
+						</label>
+						<label class='form--text'>
+							<div class='form--text--label'>Repeat Password</div>
+							<input type='password' name='repeat-password' class='form--text--input js-input' />
+						</label>
+						<div class='form--submit'>
+							<button class='form--submit--btn'>Sign Up</button>
+						</div>
+					</form>
 				</div>
+
 			</div>
 		</div>
 	</div>
