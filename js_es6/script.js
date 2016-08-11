@@ -60,7 +60,6 @@ $(document).ready(()=> {
         canvasSelector: '.js-canvas',
     });
 
-
     $optionBtn.on('click', optionBtnClickHandler);
     $overlay.find('.js-close-overlay').on('click', closeOverlay);
     $modalToggleBtn.on('click', showOverlay);
