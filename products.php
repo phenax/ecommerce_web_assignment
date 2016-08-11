@@ -8,14 +8,17 @@ require_once './partials/head.php'
 <body>
 
 <?php
+	function sanitizeToInt($data) {
+		$data= htmlspecialchars($data);
+		return (int) $data;
+	}
 
-function sanitizeToInt($data) {
-	$data= htmlspecialchars($data);
-	return (int) $data;
-}
-
-$data_render_id= (isset($_GET['id']))? sanitizeToInt($_GET['id']): -1;
+	$data_render_id= (isset($_GET['id']))? sanitizeToInt($_GET['id']): -1;
 ?>
+
+<div class='loading js-loading'>
+	<div class='spinner'></div>
+</div>
 
 <div class='products-app clearfix' data-request-id='<?= $data_render_id ?>'>
 	Rendering...

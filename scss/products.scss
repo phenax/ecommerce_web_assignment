@@ -2,12 +2,18 @@
 
 $block_height: 300px;
 
-a {
-    color: #666;
-}
-
 .products-list {
     margin-top: 80px;
+}
+
+.nav {
+    margin-left: 1em;
+    margin-bottom: 3em;
+    font-size: 0.9em;
+
+    span {
+        font-size: 0.9em;
+    }
 }
 
 .product {

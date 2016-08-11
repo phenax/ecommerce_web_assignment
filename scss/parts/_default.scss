@@ -27,3 +27,59 @@ button {
 	border: none;
 	cursor: pointer;
 }
+
+a {
+    color: #666;
+    text-decoration: none;
+
+    &:link {
+        color: $accent_color;
+    }
+}
+
+@keyframes spinner_spinning {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+
+.loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	background-color: #fff;
+
+	z-index: 20;
+
+	&.hidden {
+		visibility: hidden;
+		opacity: 0;
+	}
+
+	.spinner {
+		position: absolute;
+		top:0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+
+		margin: auto;
+		width: 50px;
+		height: 50px;
+		border: 3px solid transparent;
+		border-right-color:$accent_color;
+		border-left-color:$accent_color;
+		border-radius: 50%;
+
+		animation: spinner_spinning .6s linear infinite;
+	}
+}

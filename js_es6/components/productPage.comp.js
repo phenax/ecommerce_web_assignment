@@ -3,6 +3,8 @@ import ReactDom from 'react-dom';
 
 import simple_store from '../store/simple_store.js';
 
+import * as loader from '../loading';
+
 export class ProductPage extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +16,10 @@ export class ProductPage extends Component {
         };
 
         simple_store.bindChange(this.productChange.bind(this));
+    }
+
+    componentDidMount() {
+        loader.stopLoading();
     }
 
     productChange() {
@@ -32,6 +38,11 @@ export class ProductPage extends Component {
 
         return (
             <div className='product-page clearfix'>
+                <div className='nav'>
+                    <a href='/'>Home</a> <span className='fa fa-long-arrow-right'></span>
+                    <a href='/products.php'>Products</a> <span className='fa fa-long-arrow-right'></span>
+                    <a>TShirt</a>
+                </div>
                 <div className='wrapper row clearfix'>
                     <div className='image col col-4'>
                         {(this.state.product.thumb)? (image): (<div>&nbsp;</div>) }

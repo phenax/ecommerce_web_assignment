@@ -81,7 +81,8 @@
 </section>
 
 <section class='about'>
-	Yello
+	<div class='title'>Products</div>
+	<a href='/products.php'>View all products</a>
 </section>
 
 <script src='./js/script.js'></script>
