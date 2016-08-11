@@ -1,5 +1,24 @@
 
 
+.row {
+    float: left;
+    width: 100%;
+
+    .col {
+        float: left;
+
+        $n: 12;
+
+        @for $i from 1 through $n {
+            $wid: (100%) * $i / $n;
+
+            &.col-#{$i} {
+                width: $wid;
+            }
+        }
+    }
+}
+
 
 
 .clearfix::after {

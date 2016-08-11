@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>ECommerce</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+<?php require_once './partials/head.php' ?>
+	<title>Awesome ECommerce</title>
 	<link rel="stylesheet" type="text/css" href="./css/style.css" />
-	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald|Roboto" />
 </head>
 <body>
 
