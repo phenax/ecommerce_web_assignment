@@ -60,6 +60,8 @@ a {
 
 	z-index: 20;
 
+	transition: all .4s ease-in-out;
+
 	&.hidden {
 		visibility: hidden;
 		opacity: 0;
@@ -81,5 +83,15 @@ a {
 		border-radius: 50%;
 
 		animation: spinner_spinning .6s linear infinite;
+	}
+}
+
+.ham {
+	width: 2em;
+
+	.bar {
+		height: 0.3em;
+		margin: 0.3em 0;
+		background-color: #fff;
 	}
 }

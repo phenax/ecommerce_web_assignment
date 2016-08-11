@@ -1,8 +1,7 @@
-import $ from 'jquery';
+
+import * as loader from './loading';
+
 import { Canvas } from './Canvas';
-
-window.$= $;
-
 
 const $overlay= $('.js-overlay');
 const $authBox= $overlay.find('.js-auth');
@@ -60,9 +59,15 @@ $(document).ready(()=> {
         canvasSelector: '.js-canvas',
     });
 
+    canvas.handlers.mousemove= (e)=> {
+
+    };
+
     $optionBtn.on('click', optionBtnClickHandler);
     $overlay.find('.js-close-overlay').on('click', closeOverlay);
     $modalToggleBtn.on('click', showOverlay);
     $textInput.on('focus', inputOnFocusHandler);
     $textInput.on('blur', inputOnBlurHandler);
+
+    loader.stopLoading();
 });

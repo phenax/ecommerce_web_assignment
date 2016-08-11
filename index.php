@@ -4,6 +4,11 @@
 </head>
 <body>
 
+<div class='loading js-loading'>
+	<div class='spinner'></div>
+</div>
+
+
 <div class='overlay js-overlay'>
 	<div class='bg-color js-close-overlay'></div>
 
@@ -63,20 +68,34 @@
 </div>
 
 <header class='clearfix'> <!-- .fixed-topbar -->
-	<div class='logo'></div>
+	<div class='logo'><img style='width: 100%;' src='./img/logo.svg'></div>
 	<nav>
 		<ul>
 			<li><button class='_nav--btn js-modal-btn' data-modal='login'>Login</button></li>
 			<li><button class='_nav--btn js-modal-btn' data-modal='signup'>Signup</button></li>
 		</ul>
 	</nav>
+
+	<button class='_header--btn'>
+		<div class='ham'>
+			<div class='bar'></div>
+			<div class='bar'></div>
+			<div class='bar'></div>
+		</div>
+		<div class='_header--btn--menu'>
+			<div class='_header--btn--menu--item'><a href='#'>Home</a></div>
+			<div class='_header--btn--menu--item'><a href='#'>About</a></div>
+			<div class='_header--btn--menu--item'><a href='#'>Link</a></div>
+			<div class='_header--btn--menu--item'><a href='#'>Contact</a></div>
+		</div>
+	</button>
 </header>
 
 <section class='banner'>
 	<canvas class='banner--canvas js-canvas'></canvas>
 	<div class='banner--text'>
-		<div class='banner--text--main'>Awesome Commerce</div>
-		<div class='banner--text--sub'>Our awesome slogan</div>
+		<div class='banner--text--main'>Storm Trooper E-commerce</div>
+		<div class='banner--text--sub'>A long time ago in a galaxy far far away...</div>
 	</div>
 </section>
 

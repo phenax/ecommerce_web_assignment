@@ -21,15 +21,19 @@ var Canvas = exports.Canvas = function () {
 
         this.resizeHandler();
 
-        this.particles = this.createParticles(20, 5);
+        this.particles = this.createParticles(400, 1);
 
         this.functionBinding();
+
+        this.handlers = {
+            mousemove: function mousemove(e) {},
+            resize: function resize(e) {}
+        };
     }
 
     _createClass(Canvas, [{
         key: 'functionBinding',
         value: function functionBinding() {
-            this.frameIterator = this.frameIterator.bind(this);
             this.resizeHandler = this.resizeHandler.bind(this);
             this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
 
@@ -37,29 +41,28 @@ var Canvas = exports.Canvas = function () {
             window.addEventListener('touchmove', this.mouseMoveHandler);
             window.addEventListener('resize', this.resizeHandler);
 
-            window.requestAnimationFrame(this.frameIterator);
+            this.drawOnCanvas();
         }
     }, {
         key: 'mouseMoveHandler',
         value: function mouseMoveHandler(e) {
             var ev = {};
 
-            ev.pageX = e.pageX || e.touches[0].pageX;
-            ev.pageY = e.pageY || e.touches[0].pageY;
+            ev.pageX = e.pageX || e.touches[0].pageX || 0;
+            ev.pageY = e.pageY || e.touches[0].pageY || 0;
 
-            if (ev.pageX <= 0.3 * this.$canvas.width) {
-                this.particles[0].setPosition(ev.pageX, ev.pageY);
-            } else if (ev.pageX >= 0.7 * this.$canvas.width) {
-                this.particles[0].setPosition(ev.pageX, ev.pageY);
-            } else {
-                this.particles[0].setInitialPosition(5);
-            }
+            this.handlers.mousemove(ev);
         }
     }, {
         key: 'resizeHandler',
-        value: function resizeHandler() {
+        value: function resizeHandler(e) {
             this.$canvas.width = $(window).width();
             this.$canvas.height = $(window).height();
+
+            if (e) {
+                this.drawOnCanvas();
+                this.handlers.resize(e);
+            }
         }
     }, {
         key: 'createParticles',
@@ -67,11 +70,15 @@ var Canvas = exports.Canvas = function () {
             var particleOffset = this.$canvas.height / numberOfParticles;
             var particles = [];
 
+            var randomNum = function randomNum(min, max) {
+                return Math.random() * (max - min) + min;
+            };
+
             for (var i = 0; i < numberOfParticles; i++) {
                 particles.push(new _Particle.Particle({
                     pos: {
-                        x: this.$canvas.width / 2,
-                        y: particleOffset * i
+                        x: randomNum(0, this.$canvas.width * 2),
+                        y: randomNum(0, this.$canvas.height * 2)
                     },
                     size: particleSize
                 }));
@@ -80,29 +87,54 @@ var Canvas = exports.Canvas = function () {
             return particles;
         }
     }, {
-        key: 'frameIterator',
-        value: function frameIterator() {
-
-            this.drawParticle();
-
-            window.requestAnimationFrame(this.frameIterator);
-        }
-    }, {
-        key: 'drawParticle',
-        value: function drawParticle() {
+        key: 'drawOnCanvas',
+        value: function drawOnCanvas() {
             this.ctx.clearRect(0, 0, this.$canvas.width, this.$canvas.height);
 
+            this.ctx.fillStyle = "rgba(255,255,255, 0.7)";
+
+            // Render all particles on the canvas
             for (var i = 0; i < this.particles.length; i++) {
                 var obj = this.particles[i];
 
                 this.ctx.beginPath();
 
-                this.ctx.fillStyle = "#555";
-
                 this.ctx.arc(obj.position.x, obj.position.y, obj.size, 0, Math.PI * 2);
 
                 this.ctx.fill();
             }
+
+            // Amount of change in angle(not exactly but yeah)
+            var amount = 0.8;
+
+            // Amount of spins for the spiral
+            var spin = parseInt(Math.sqrt(Math.pow(this.$canvas.width, 2) + Math.pow(this.$canvas.height, 2)) * 0.4);
+
+            this.ctx.beginPath();
+
+            this.ctx.moveTo(this.$canvas.width / 2, this.$canvas.height / 2);
+
+            for (var _i = 0; _i < spin; _i++) {
+
+                var angle = amount * _i;
+
+                var x = (1 + 2 * angle) * Math.cos(angle);
+                var y = (1 + 2 * angle) * Math.sin(angle);
+
+                this.ctx.lineTo(x + this.$canvas.width / 2, y + this.$canvas.height / 2);
+            }
+
+            // color
+            this.ctx.strokeStyle = 'rgba(100, 100, 100, 0.2)';
+
+            // Size of the lines
+            this.ctx.lineWidth = 1;
+
+            // Rounded line ends
+            this.ctx.lineCap = 'round';
+
+            // Render the polyline
+            this.ctx.stroke();
         }
     }]);
 
@@ -169,26 +201,51 @@ var Particle = exports.Particle = function () {
 },{}],3:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.startLoading = startLoading;
+exports.stopLoading = stopLoading;
+
 var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
-
-var _Canvas = require('./Canvas');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.$ = _jquery2.default;
 
-var $overlay = (0, _jquery2.default)('.js-overlay');
+var $spinner = (0, _jquery2.default)('.js-loading');
+
+function startLoading() {
+    $spinner.removeClass('hidden');
+}
+
+function stopLoading() {
+    $spinner.addClass('hidden');
+}
+
+},{"jquery":5}],4:[function(require,module,exports){
+'use strict';
+
+var _loading = require('./loading');
+
+var loader = _interopRequireWildcard(_loading);
+
+var _Canvas = require('./Canvas');
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var $overlay = $('.js-overlay');
 var $authBox = $overlay.find('.js-auth');
 var $optionBtn = $authBox.find('.js-option-btn');
 var $authBtns = $authBox.find('.js-auth-type');
 var $textInput = $authBox.find('.js-input');
 
-var $modalToggleBtn = (0, _jquery2.default)('.js-modal-btn');
+var $modalToggleBtn = $('.js-modal-btn');
 
 function optionBtnClickHandler() {
-    var optionTarget = (0, _jquery2.default)(this).data('option');
+    var optionTarget = $(this).data('option');
     changeAuthType(optionTarget);
 }
 
@@ -209,34 +266,38 @@ function closeOverlay() {
 }
 
 function showOverlay() {
-    var currentTarget = (0, _jquery2.default)(this).data('modal');
+    var currentTarget = $(this).data('modal');
     changeAuthType(currentTarget);
     $overlay.addClass('overlay__visible');
 }
 
 function inputOnFocusHandler() {
-    (0, _jquery2.default)(this).parent().addClass('on-focus');
+    $(this).parent().addClass('on-focus');
 }
 
 function inputOnBlurHandler() {
-    var $this = (0, _jquery2.default)(this);
+    var $this = $(this);
 
     if ($this.val() == "" || $this.val() == " ") $this.parent().removeClass('on-focus');
 }
 
-(0, _jquery2.default)(document).ready(function () {
+$(document).ready(function () {
     var canvas = new _Canvas.Canvas({
         canvasSelector: '.js-canvas'
     });
+
+    canvas.handlers.mousemove = function (e) {};
 
     $optionBtn.on('click', optionBtnClickHandler);
     $overlay.find('.js-close-overlay').on('click', closeOverlay);
     $modalToggleBtn.on('click', showOverlay);
     $textInput.on('focus', inputOnFocusHandler);
     $textInput.on('blur', inputOnBlurHandler);
+
+    loader.stopLoading();
 });
 
-},{"./Canvas":1,"jquery":4}],4:[function(require,module,exports){
+},{"./Canvas":1,"./loading":3}],5:[function(require,module,exports){
 /*eslint-disable no-unused-vars*/
 /*!
  * jQuery JavaScript Library v3.1.0
@@ -10312,7 +10373,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[3])
+},{}]},{},[4])
 
 
 //# sourceMappingURL=script.js.map

@@ -21,17 +21,18 @@ header {
 	.logo {
 		float: left;
 
-		$logo_size: 2em;
+		$logo_size: 3em;
 
 		width: $logo_size;
 		height: $logo_size;
 		margin: 0.6em 1em;
 
-		background-color: $accent_color;
+		// background-color: $accent_color;
 	}
 
 	nav {
 		float: right;
+		font-size: 1em;
 		margin-right: 3em;
 
 		ul {
@@ -86,12 +87,91 @@ header {
 	}
 }
 
+._header--btn {
+	position: fixed;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+
+	background-color: transparent;
+	padding: 1em;
+
+	font-size: 1em;
+
+	perspective: 2000px;
+
+	&--menu {
+		position: absolute;
+		right: 100%;
+		top: 50%;
+
+		padding: 1em 0;
+		margin-right: 2em;
+		min-width: 150px;
+
+		background-color: #fff;
+		transition: all .3s ease-in-out;
+		visibility: hidden;
+		opacity: 0;
+		transform: translate(50px, -50%) scale(0.8) rotateY(-45deg);
+
+		font-size: 1em;
+
+		box-shadow: 0 0 10px 1px rgba(0,0,0,.3);
+
+		&::after {
+			position: absolute;
+			top: 50%;
+			left: 100%;
+
+			width: 0;
+			height: 0;
+			border: 10px solid transparent;
+
+			transform: translateY(-50%);
+
+			border-left-color: #fff;
+		}
+
+		&--item {
+			padding: 1em 2em;
+			font-size: 1.1em;
+			text-align: center;
+
+			transition: all .3s ease-in-out;
+			// border-right: .3em solid transparent;
+
+			a {
+				color: #555;
+			}
+
+			&:hover {
+				// border-color: $accent_color;
+
+				a {
+					color: $accent_color;
+				}
+			}
+		}
+	}
+
+	&:hover {
+		._header--btn--menu {
+			visibility: visible;
+			opacity: 1;
+			transform: translate(0, -50%) scale(1) rotateY(0deg);
+		}
+	}
+}
+
 
 .banner {
 	position: relative;
 
 	height: 100vh;
 	border-bottom: 1px solid #000;
+
+	font-size: 1em;
 
 	background-color: $primary_color;
 
@@ -276,12 +356,13 @@ header {
 
 .form {
 	padding: .5em;
+	font-size: 0.9em;
 
 	&--text {
 		display: block;
 		position: relative;
 
-		border-bottom: 2px solid #aaa;
+		border-bottom: 0.12em solid #ccc;
 		padding: 0.8em;
 		margin: 0.6em 0;
 
@@ -294,7 +375,7 @@ header {
 			left: 50%;
 
 			width: 0;
-			height: 2px;
+			height: 0.12em;
 
 			background-color: $accent_color;
 
@@ -351,7 +432,7 @@ header {
 		margin-top: 2em;
 
 		&--btn {
-			border: 2px solid #888;
+			border: 0.12em solid #888;
 			padding: 0.5em 1.3em;
 
 			background-color: transparent;
@@ -371,7 +452,6 @@ header {
 
 
 .title {
-
 	margin: 2em 0 1em;
 
 	font-size: 2.4em;
@@ -382,4 +462,30 @@ section.about {
 	padding: 1em;
 	padding-bottom: 3em;
 	text-align: center;
+}
+
+
+
+@media all and (max-width: 800px) {
+	section.banner {
+		font-size: 0.8em;
+	}
+
+	header {
+		font-size: 0.8em;
+
+		nav {
+			margin-right: 2em;
+		}
+
+		._header--btn {
+			top: 30%;
+		}
+	}
+}
+
+@media all and (max-width: 400px) {
+	section.banner {
+		font-size: 0.7em !important;
+	}
 }
