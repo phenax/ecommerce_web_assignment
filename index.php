@@ -68,7 +68,7 @@
 </div>
 
 <header class='clearfix'> <!-- .fixed-topbar -->
-	<div class='logo'><img style='width: 100%;' src='./img/logo.svg'></div>
+	<a href='/'><div class='logo'><img style='width: 100%;' src='./img/logo.svg'></div></a>
 	<nav>
 		<ul>
 			<li><button class='_nav--btn js-modal-btn' data-modal='login'>Login</button></li>

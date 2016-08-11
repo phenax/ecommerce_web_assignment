@@ -42,7 +42,15 @@ var Header = exports.Header = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'topbar' },
-                    _react2.default.createElement('div', { className: 'topbar--logo' }),
+                    _react2.default.createElement(
+                        'a',
+                        { href: '/' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'topbar--logo' },
+                            _react2.default.createElement('img', { src: './img/logo.svg', width: '100%' })
+                        )
+                    ),
                     _react2.default.createElement(
                         'label',
                         { className: 'topbar--search clearfix' },
@@ -405,7 +413,15 @@ Object.defineProperty(exports, "__esModule", {
 exports.startLoading = startLoading;
 exports.stopLoading = stopLoading;
 
-var $spinner = $('.js-loading');
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+window.$ = _jquery2.default;
+
+var $spinner = (0, _jquery2.default)('.js-loading');
 
 function startLoading() {
     $spinner.removeClass('hidden');
@@ -415,7 +431,7 @@ function stopLoading() {
     $spinner.addClass('hidden');
 }
 
-},{}],6:[function(require,module,exports){
+},{"jquery":35}],6:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
