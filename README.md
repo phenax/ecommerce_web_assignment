@@ -1,5 +1,7 @@
 # ECommerce Web Assignment
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/phenax/ecommerce_web_assignment.svg)](https://greenkeeper.io/)
+
 
 ## Instructions
 1. Run `php -S 127.0.0.1:8080` to create a PHP server in the current directory.
